@@ -1,9 +1,7 @@
 //
 //  APIRouter.swift
-//  PetPlanner
 //
-//  Created by Appiskey's iOS Dev on 7/8/19.
-//  Copyright © 2019 Appiskey. All rights reserved.
+//  Created by Ahzam's iOS Dev on 7/8/19.
 //
 
 import Foundation

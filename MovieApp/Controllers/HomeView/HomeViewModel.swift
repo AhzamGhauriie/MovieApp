@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- Protocols:
+// MARK: - Protocols:
 protocol HomeViewModelDelegate: AnyObject {
     func reloadTableView()
 }
@@ -15,11 +15,11 @@ protocol HomeViewModelDelegate: AnyObject {
 class HomeViewModel: BaseViewModel {
     
     // MARK: - Variables:
-    weak var delegate : HomeViewModelDelegate?
     var movieRepository : MovieRepository = MovieRepository()
+    weak var delegate : HomeViewModelDelegate?
+    private var isMorePageRequired = true
     var movies : [Result] = []
     var currentPage = 1
-    private var isMorePageRequired = true
     
     // MARK: - Initilizer:
     init(binding : HomeViewModelDelegate) {
@@ -28,12 +28,14 @@ class HomeViewModel: BaseViewModel {
         getMovieData()
     }
     
+    // MARK: - Get Movie Data
     func getMovieData() {
         movieRepository.getMovieList(page: currentPage, completion:  { (response, page) in
             
             guard let jobsData = response?.results else {
                 return
             }
+            
             if self.currentPage == 1 {
                 self.movies = jobsData
             } else {
@@ -48,7 +50,6 @@ class HomeViewModel: BaseViewModel {
             }
             
             self.delegate?.reloadTableView()
-            
         }, errorCompletion: { (ServerErrorResponse, message) in
             self.isLoading = false
                 if let message = message {

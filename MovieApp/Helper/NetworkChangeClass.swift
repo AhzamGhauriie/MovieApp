@@ -1,9 +1,8 @@
 //
 //  NetworkChangeClass.swift
-//  PetPlanner
+//  
 //
-//  Created by Maniar on 8/5/19.
-//  Copyright © 2019 Appiskey. All rights reserved.
+// Created by Ahzam Ghori on 30/07/2023.
 //
 
 import Foundation

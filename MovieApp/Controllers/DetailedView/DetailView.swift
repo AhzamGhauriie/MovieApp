@@ -49,18 +49,24 @@ extension DetailView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailTableViewCell") as! MovieDetailTableViewCell
         
+        let obj = (self.viewModel as! DetailViewModel).moviesData
+        
         cell.movieImage.sd_setShowActivityIndicatorView(true)
         cell.movieImage.sd_setIndicatorStyle(UIActivityIndicatorView.Style.whiteLarge)
-        if let img = (self.viewModel as! DetailViewModel).moviesData?.posterPath {
-            cell.movieImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original" + ((self.viewModel as! DetailViewModel).moviesData?.posterPath ?? "")))
+        
+        if let img = obj.posterPath {
+            cell.movieImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original" + (obj?.posterPath ?? "")))
         }
-        cell.movieRating.text =  "\((self.viewModel as! DetailViewModel).moviesData?.voteAverage ?? 0)/10"
-        cell.movieTitle.text =  (self.viewModel as! DetailViewModel).moviesData?.title
-        cell.movieOverview.text = (self.viewModel as! DetailViewModel).moviesData?.overview ?? ""
-        if let release = (self.viewModel as! DetailViewModel).moviesData?.releaseDate {
-            cell.movieORelease.text = "•\((self.viewModel as! DetailViewModel).moviesData?.releaseDate ?? "")" + "•\((self.viewModel as! DetailViewModel).moviesData?.productionCompanies?[0].originCountry ?? "")"
+        
+        if let release = obj?.releaseDate {
+            cell.movieORelease.text = "•\(obj?.releaseDate ?? "")" + "•\(obj?.productionCompanies?[0].originCountry ?? "")"
         }
-        cell.movieTagLine.text = "\((self.viewModel as! DetailViewModel).moviesData?.tagline ?? "")"
+        
+        cell.movieRating.text =  "\(obj?.voteAverage ?? 0)/10"
+        cell.movieTitle.text =  obj?.title
+        cell.movieOverview.text = obj?.overview ?? ""
+        cell.movieTagLine.text = "\(obj?.tagline ?? "")"
+        
         return cell
     }
     
