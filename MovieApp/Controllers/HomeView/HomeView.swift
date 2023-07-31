@@ -59,6 +59,7 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as! MovieTableViewCell
         cell.movieImg.sd_setShowActivityIndicatorView(true)
         cell.movieImg.sd_setIndicatorStyle(UIActivityIndicatorView.Style.whiteLarge)
+        
         if networkAdapter.isNetworkAvailable {
             cell.movieImg.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original" + (viewModel as! HomeViewModel).movies[indexPath.row].backdropPath! ))
             cell.movieTitle.text = (viewModel as! HomeViewModel).movies[indexPath.row].title

@@ -54,7 +54,7 @@ extension DetailView: UITableViewDelegate, UITableViewDataSource {
         cell.movieImage.sd_setShowActivityIndicatorView(true)
         cell.movieImage.sd_setIndicatorStyle(UIActivityIndicatorView.Style.whiteLarge)
         
-        if let img = obj.posterPath {
+        if let img = obj?.posterPath {
             cell.movieImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original" + (obj?.posterPath ?? "")))
         }
         
